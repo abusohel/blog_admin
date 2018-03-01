@@ -32,7 +32,7 @@
 	          <form role="form" action="{{ route('tag.store') }}" method="post">
 	          {{ csrf_field() }}
 	            <div class="box-body">
-	            <div class="col-lg-offset-3 col-lg-6">
+	            <div class="col-md-offset-3 col-md-6">
 	              <div class="form-group">
 	                <label for="name">Tag title</label>
 	                <input type="text" class="form-control" id="name" name="name" placeholder="Tag Title">

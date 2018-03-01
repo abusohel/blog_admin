@@ -23,7 +23,7 @@
 	        <!-- general form elements -->
 	        <div class="box box-primary">
 	          <div class="box-header with-border">
-	            <h3 class="box-title">Category</h3>
+	            <h3 class="box-title">Categories</h3>
 	          </div>
 	    		@include('includes.messages')      
 	          <!-- /.box-header -->
@@ -31,7 +31,7 @@
 	          <form role="form" action="{{ route('category.store') }}" method="post">
 	          {{ csrf_field() }}
 	            <div class="box-body">
-	            <div class="col-lg-offset-3 col-lg-6">
+	            <div class="col-md-offset-3 col-md-6">
 	              <div class="form-group">
 	                <label for="name">Category title</label>
 	                <input type="text" class="form-control" id="name" name="name" placeholder="Category Title">

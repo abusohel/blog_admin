@@ -29,7 +29,7 @@
           <!-- form start -->
           <form role="form">
             <div class="box-body">
-            <div class="col-lg-6">
+            <div class="col-md-6">
               <div class="form-group">
                 <label for="title">Post Title</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="Title">
