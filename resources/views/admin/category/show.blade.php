@@ -45,7 +45,7 @@
                   <thead>
                     <tr>
                       <th>S.No</th>
-                      <th>Tag Name</th>
+                      <th>Category Name</th>
                       <th>Slug</th>
                       <th>Edit</th>
                       <th>Delete</th>
@@ -80,7 +80,7 @@
                 <tfoot>
                   <tr>
                     <th>S.No</th>
-                    <th>Tag Name</th>
+                    <th>Category Name</th>
                     <th>Slug</th>
                     <th>Edit</th>
                     <th>Delete</th>
