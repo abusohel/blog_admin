@@ -1,6 +1,11 @@
 @extends('user/app')
 
 @section('bg-img',asset('user/img/post-bg.jpg'))
+
+@section('head')
+<link rel="stylesheet" href="{{ asset('user/css/prism.css') }}">
+@endsection
+
 @section('title',$post->title)
 @section('sub-heading',$post->subtitle)
 
@@ -36,10 +41,14 @@
                 </small>
                 @endforeach
             </div>
-           <div class="fb-comments" data-href="https://127.0.0.1:8000" data-numposts="5"></div>
+           <div class="fb-comments" data-href="{{ Request::url() }}" data-numposts="5"></div>
         </div>
     </div>
 </article>
 
 <hr>
+@endsection
+
+@section('footer')
+<script src="{{ asset('user/js/prism.js') }}"></script>
 @endsection

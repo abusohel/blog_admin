@@ -18,6 +18,10 @@ class post extends Model
 
     public function getRouteKeyName()
     {
-    	return 'slug';
+        return 'slug';
     }
+    // public function getRouteKeyName()
+    // {
+    // 	return 'id';
+    // }
 }
