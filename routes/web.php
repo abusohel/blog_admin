@@ -22,7 +22,9 @@ Route::group(['namespace' => 'Admin'],function(){
 });
 
 
+Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
 
 
 
@@ -72,3 +74,5 @@ Route::group(['namespace' => 'Admin'],function(){
 // Route::get('admin/category',function(){
 // 	return view('admin.category.category');
 // });
+
+
