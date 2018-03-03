@@ -1,30 +1,31 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
-use App\Model\user\post;
 use App\Model\user\category;
+use App\Model\user\post;
 use App\Model\user\tag;
 use Illuminate\Http\Request;
-
 class PostController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-     public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
     public function index()
     {
         $posts = post::all();
-        return view('admin.post.show',compact('posts'));  
+        return view('admin.post.show',compact('posts'));   
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +37,6 @@ class PostController extends Controller
         $categories =category::all();
         return view('admin.post.post',compact('tags','categories'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -51,7 +51,7 @@ class PostController extends Controller
             'slug' => 'required',
             'body' => 'required',
             'image' => 'required',
-        ]);
+            ]);
         if ($request->hasFile('image')) {
             $imageName = $request->image->store('public');
         }else{
@@ -69,7 +69,6 @@ class PostController extends Controller
         $post->categories()->sync($request->categories);
         return redirect(route('post.index'));
     }
-
     /**
      * Display the specified resource.
      *
@@ -78,9 +77,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -90,12 +88,10 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = post::with('tags','categories')->where('id',$id)->first();
-        // return $post;
         $tags =tag::all();
         $categories =category::all();
         return view('admin.post.edit',compact('tags','categories','post'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -111,11 +107,10 @@ class PostController extends Controller
             'slug' => 'required',
             'body' => 'required',
             'image'=>'required'
-        ]);
-         if ($request->hasFile('image')) {
+            ]);
+        if ($request->hasFile('image')) {
             $imageName = $request->image->store('public');
         }
-
         $post = post::find($id);
         $post->image = $imageName;
         $post->title = $request->title;
@@ -128,7 +123,6 @@ class PostController extends Controller
         $post->save();
         return redirect(route('post.index'));
     }
-
     /**
      * Remove the specified resource from storage.
      *

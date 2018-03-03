@@ -1,6 +1,4 @@
 <?php
-
-
 // User Routes
 Route::group(['namespace' => 'User'],function(){
 	Route::get('/','HomeController@index');
@@ -13,6 +11,10 @@ Route::group(['namespace' => 'Admin'],function(){
 	Route::get('admin/home','HomeController@index')->name('admin.home');
 	// Users Routes
 	Route::resource('admin/user','UserController');
+	// Roles Routes
+	Route::resource('admin/role','RoleController');
+	// Permission Routes
+	Route::resource('admin/permission','PermissionController');
 	// Post Routes
 	Route::resource('admin/post','PostController');
 	// Tag Routes
@@ -23,59 +25,5 @@ Route::group(['namespace' => 'Admin'],function(){
 	Route::get('admin-login', 'Auth\LoginController@showLoginForm')->name('admin.login');
 	Route::post('admin-login', 'Auth\LoginController@login');
 });
-
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Route::get('/', function () {
-//     return view('user.blog');
-// });
-
-// Route::get('post',function(){
-// 	return view('user.post');
-// })->name('post');
-
-// Route::get('admin/home',function(){
-// 	return view('admin.home');
-// })->name('post');
-
-
-// Route::get('admin/post',function(){
-// 	return view('admin.post.post');
-// });
-
-// Route::get('admin/tag',function(){
-// 	return view('admin.tag.tag');
-// });
-
-// Route::get('admin/category',function(){
-// 	return view('admin.category.category');
-// });
-
-

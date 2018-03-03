@@ -32,7 +32,6 @@ class LoginController extends Controller
     {
         return view('admin.login');
     }
-
     public function login(Request $request)
     {
         $this->validateLogin($request);
@@ -41,13 +40,10 @@ class LoginController extends Controller
         }
         return $this->sendFailedLoginResponse($request);
     }
-
-
     public function __construct()
     {
         $this->middleware('guest:admin')->except('logout');
     }
-
     protected function guard()
     {
         return Auth::guard('admin');

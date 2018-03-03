@@ -1,20 +1,10 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use App\Model\admin\admin;
 use App\Model\admin\role;
 use Illuminate\Http\Request;
-class UserController extends Controller
+class RoleController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -22,8 +12,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = admin::all();
-        return view('admin.user.show',compact('users'));
+        $roles = role::all();
+        return view('admin.role.show',compact('roles'));
     }
     /**
      * Show the form for creating a new resource.
@@ -32,8 +22,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = role::all();
-        return view('admin.user.create',compact('roles'));
+        return view('admin.role.create');
     }
     /**
      * Store a newly created resource in storage.
@@ -43,7 +32,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        $this->validate($request,[
+            'name' =>'required|max:50|unique:roles'
+            ]);
+        $role = new role;
+        $role->name = $request->name;
+        $role->save();
+        return redirect(route('role.index'));
     }
     /**
      * Display the specified resource.
@@ -63,7 +58,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = role::find($id);
+        return view('admin.role.edit',compact('role'));
     }
     /**
      * Update the specified resource in storage.
@@ -74,7 +70,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name' =>'required|max:50'
+            ]);
+        $role = role::find($id);
+        $role->name = $request->name;
+        $role->save();
+        return redirect(route('role.index'));
     }
     /**
      * Remove the specified resource from storage.
@@ -84,6 +86,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        role::where('id',$id)->delete();
+        return redirect()->back();
     }
 }

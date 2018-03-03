@@ -1,28 +1,29 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use App\Model\user\tag;
 use Illuminate\Http\Request;
-
 class TagController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-     public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
     public function index()
     {
         $tags = tag::all();
         return view('admin.tag.show',compact('tags'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -32,7 +33,6 @@ class TagController extends Controller
     {
         return view('admin.tag.tag');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -42,16 +42,15 @@ class TagController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-                   'name' => 'required',
-                   'slug' => 'required',
-                   ]);
-               $tag = new tag;
-               $tag->name = $request->name;
-               $tag->slug = $request->slug;
-               $tag->save();
-               return redirect(route('tag.index'));
+            'name' => 'required',
+            'slug' => 'required',
+            ]);
+        $tag = new tag;
+        $tag->name = $request->name;
+        $tag->slug = $request->slug;
+        $tag->save();
+        return redirect(route('tag.index'));
     }
-
     /**
      * Display the specified resource.
      *
@@ -62,7 +61,6 @@ class TagController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -74,7 +72,6 @@ class TagController extends Controller
         $tag = tag::where('id',$id)->first();
         return view('admin.tag.edit',compact('tag'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -87,14 +84,13 @@ class TagController extends Controller
         $this->validate($request,[
             'name' => 'required',
             'slug' => 'required',
-        ]);
+            ]);
         $tag = tag::find($id);
         $tag->name = $request->name;
         $tag->slug = $request->slug;
         $tag->save();
         return redirect(route('tag.index'));
     }
-
     /**
      * Remove the specified resource from storage.
      *
